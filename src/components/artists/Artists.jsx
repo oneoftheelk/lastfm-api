@@ -1,8 +1,13 @@
 import React from 'react';
 
+import LocalNav from '../common/LocalNav';
+
 const Artists = () => {
   return (
-    <h1>Hi</h1>
+    <>
+      <LocalNav />
+      <h1>Artists</h1>
+    </>
   );
 }
 
