@@ -1,11 +1,23 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 
-function App() {
+import Navbar from './components/navbar/Navigation';
+import Artists from './components/artists/Artists';
+
+import Container from 'react-bootstrap/Container'
+
+const App = () => {
   return (
-    <div>
-      <h1>sfsd</h1>
-    </div>
+    <>
+      <Container>
+        <Navbar />
+      
+        <Switch>
+          <Route path='/artists' component={Artists} />
+        </Switch>
+      </Container>
+    </>
   );
 }
 
