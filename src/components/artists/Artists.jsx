@@ -1,14 +1,31 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getChart } from './../../redux/artists-reducer';
 
 import LocalNav from '../common/LocalNav';
+import ArtistsChart from './artistsChart/ArtistChart';
 
-const Artists = () => {
+const Artists = (props) => {
   return (
     <>
       <LocalNav />
-      <h1>Artists</h1>
+      <Switch>
+        <Route
+          exact path='/artists/charts'
+          render={() => <ArtistsChart {...props} /> }
+        />
+      </Switch>
     </>
   );
 }
 
-export default Artists;
+const mapStateToProps = (state) => {
+  return {
+    charts: state.artists.charts
+  }
+}
+
+export default connect(mapStateToProps, {
+  getChart
+})(Artists);
