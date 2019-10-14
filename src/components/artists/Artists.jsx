@@ -22,7 +22,8 @@ const Artists = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    charts: state.artists.charts
+    charts: state.artists.charts,
+    artists: state.artists.artists
   }
 }
 

@@ -1,9 +1,11 @@
 import { artistsApi } from "../api/artistsApi";
 
 const GET_CHARTS = 'LASTFM-API/ARTISTS-REDUCER/GET_CHARTS';
+const GET_ARTISTS = 'LASTFM-API/ARTISTS-REDUCER/GET_ARTISTS';
 
 const initialState = {
-  charts: []
+  charts: [],
+  artists: []
 };
 
 const artistsReducer = (state = initialState, action) => {
@@ -11,20 +13,32 @@ const artistsReducer = (state = initialState, action) => {
     case GET_CHARTS: {
       return {
         ...state,
-        charts: action.artists
+        charts: action.charts
+      }
+    }
+    case GET_ARTISTS: {
+      return {
+        ...state,
+        artists: action.artists
       }
     }
     default: return state;
   }
 };
 
-const updateChart = (artists) => ({ type: GET_CHARTS, artists });
+const updateChart = (charts) => ({ type: GET_CHARTS, charts });
+const getArtists = (artists) => ({ type: GET_ARTISTS, artists });
 
-export const getChart = () => (dispatch) => {
-  artistsApi.getChart()
-    .then(res => {
-      dispatch(updateChart(res.data.artists.artist));
-    })
+// Получаем топ исполнителей, затем получаем информацию отдельно по каждому
+// исполнителю, вошедшему в топ. Диспатчим всё это в стейт.
+export const getChart = () => async (dispatch) => {
+  const charts = await artistsApi.getChart();
+  const artists = await Promise.all(charts.map(arist => {
+    return artistsApi.getArtistsFromChart(arist.name)
+  }));
+
+  dispatch(updateChart(charts));
+  dispatch(getArtists(artists));
 };
 
 export default artistsReducer;

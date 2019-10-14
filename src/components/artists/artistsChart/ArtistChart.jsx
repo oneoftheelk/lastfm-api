@@ -4,8 +4,10 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Carousel from 'react-bootstrap/Carousel';
 
 const ArtistsChart = (props) => {
+  debugger
   let artists = props.charts
     .map(chart => {
       return ({
@@ -45,9 +47,12 @@ const ArtistsChart = (props) => {
           </ResponsiveContainer>
         </Col>
         
-        <Col>Carousel</Col>
+        <Col>
+          <Carousel>
+            
+          </Carousel>
+        </Col>
       </Row>
-      
     </>
   );
 }
