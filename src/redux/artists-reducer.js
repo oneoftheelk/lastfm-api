@@ -23,7 +23,7 @@ const updateChart = (artists) => ({ type: GET_CHARTS, artists });
 export const getChart = () => (dispatch) => {
   artistsApi.getChart()
     .then(res => {
-      dispatch(updateChart(res.data.artists));
+      dispatch(updateChart(res.data.artists.artist));
     })
 };
 
