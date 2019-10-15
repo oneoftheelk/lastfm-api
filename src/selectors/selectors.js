@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 
 export const getArtists = state => state.artists.artists;
 
+export const getSpotifyArtists = state => state.artists.spotifyArtists;
+
 const getCharts = state => state.artists.charts;
 
 export const getChartsSelector = createSelector(

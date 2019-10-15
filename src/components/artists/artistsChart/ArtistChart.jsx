@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
+import ArtistCarousel from './artistCarousel/ArtistCarousel';
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Carousel from 'react-bootstrap/Carousel';
 
 const ArtistsChart = (props) => {
-  debugger
-  let { charts } = props;
+  let { charts, artists } = props;
 
   useEffect(() => {
 		props.getChart();
@@ -25,7 +24,7 @@ const ArtistsChart = (props) => {
   return (
     <>
       <Row>
-        <Col>
+        <Col lg='7'>
           <ResponsiveContainer width='100%' height={450}>
             <BarChart layout='vertical' width={900} height={500} data={charts}
               margin={{ top: 5, right: 30, left: 30, bottom: 5 }}>
@@ -39,10 +38,8 @@ const ArtistsChart = (props) => {
           </ResponsiveContainer>
         </Col>
         
-        <Col>
-          <Carousel>
-            
-          </Carousel>
+        <Col lg='5'>
+          <ArtistCarousel artists={artists} artistsImages={props.artistsImages} />
         </Col>
       </Row>
     </>
