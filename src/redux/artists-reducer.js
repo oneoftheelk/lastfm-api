@@ -33,11 +33,11 @@ const getArtists = (artists) => ({ type: GET_ARTISTS, artists });
 // исполнителю, вошедшему в топ. Диспатчим всё это в стейт.
 export const getChart = () => async (dispatch) => {
   const charts = await artistsApi.getChart();
+  dispatch(updateChart(charts));
+
   const artists = await Promise.all(charts.map(arist => {
     return artistsApi.getArtistsFromChart(arist.name)
   }));
-
-  dispatch(updateChart(charts));
   dispatch(getArtists(artists));
 };
 

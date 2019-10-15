@@ -8,21 +8,13 @@ import Carousel from 'react-bootstrap/Carousel';
 
 const ArtistsChart = (props) => {
   debugger
-  let artists = props.charts
-    .map(chart => {
-      return ({
-        name: chart.name,
-        listeners: +chart.listeners,
-        playcount: +chart.playcount
-      })
-    })
-    .sort((a, b) => b.listeners - a.listeners);
+  let { charts } = props;
 
   useEffect(() => {
 		props.getChart();
   }, []);
 
-  if (artists.length === 0) {
+  if (charts.length === 0) {
     return (
       <Spinner animation='border' role='status'>
         <span className='sr-only'>Loading...</span>
@@ -35,7 +27,7 @@ const ArtistsChart = (props) => {
       <Row>
         <Col>
           <ResponsiveContainer width='100%' height={450}>
-            <BarChart layout='vertical' width={900} height={500} data={artists}
+            <BarChart layout='vertical' width={900} height={500} data={charts}
               margin={{ top: 5, right: 30, left: 30, bottom: 5 }}>
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis type='number' />

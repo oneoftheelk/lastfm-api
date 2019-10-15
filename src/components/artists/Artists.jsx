@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getChart } from './../../redux/artists-reducer';
+import { getChartsSelector, getArtists } from '../../selectors/selectors';
 
 import LocalNav from '../common/LocalNav';
 import ArtistsChart from './artistsChart/ArtistChart';
@@ -22,8 +23,8 @@ const Artists = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    charts: state.artists.charts,
-    artists: state.artists.artists
+    charts: getChartsSelector(state),
+    artists: getArtists(state)
   }
 }
 
